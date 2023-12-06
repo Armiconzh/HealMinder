@@ -13,16 +13,18 @@ import javax.swing.DefaultListModel;
  *
  * @author Raffy
  */
-public class HealthProfileUI extends javax.swing.JFrame {
-    private static List<String> alergiList = new ArrayList<>();
-    private static List<String> penyakitList = new ArrayList<>();
-    private static List<String> kontakList = new ArrayList<>();
-    private static List<String> goldarList = new ArrayList<>();
+public class Alarm extends javax.swing.JFrame {
+    private DefaultListModel<String> daftarObatModel;
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
+    private EditAlarm editAlarm; // Add this line
+    
     /**
-     * Creates new form HealthProfile
+     * Creates new form Alarm
      */
-    public HealthProfileUI() {
+    public Alarm() {
         initComponents();
+        daftarAlarm.setModel(listModel);
+        editAlarm = new EditAlarm();
     }
 
     /**
@@ -35,30 +37,55 @@ public class HealthProfileUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        back = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         add = new javax.swing.JLabel();
         pill = new javax.swing.JLabel();
         profile = new javax.swing.JLabel();
-        panel1 = new java.awt.Panel();
-        back = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        penyakit = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        alergi = new javax.swing.JList<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        kontak = new javax.swing.JList<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        goldar = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         edit = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        daftarAlarm = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(0, 102, 153));
+
+        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/mingcute_left-fill (1).png"))); // NOI18N
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 255, 255));
+        jLabel1.setText("Alarm");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(back)
+                .addGap(82, 82, 82)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 153));
 
@@ -90,11 +117,11 @@ public class HealthProfileUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pill, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(51, 51, 51)
                 .addComponent(add)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(profile, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,67 +134,10 @@ public class HealthProfileUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panel1.setBackground(new java.awt.Color(0, 102, 153));
-
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/mingcute_left-fill (1).png"))); // NOI18N
-        back.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backMouseClicked(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel6.setText("Health Profile");
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(back)
-                .addGap(69, 69, 69)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
-        );
-
-        jScrollPane1.setViewportView(penyakit);
-
-        jScrollPane2.setViewportView(alergi);
-
-        jScrollPane3.setViewportView(kontak);
-
-        jScrollPane4.setViewportView(goldar);
-
         jLabel2.setBackground(new java.awt.Color(0, 102, 153));
         jLabel2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel2.setText("Alergi");
-
-        jLabel3.setBackground(new java.awt.Color(0, 102, 153));
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel3.setText("Penyakit");
-
-        jLabel4.setBackground(new java.awt.Color(0, 102, 153));
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel4.setText("Kontak Darurat");
-
-        jLabel5.setBackground(new java.awt.Color(0, 102, 153));
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel5.setText("Golongan Darah");
+        jLabel2.setText("Daftar Alarm");
 
         edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit.png"))); // NOI18N
         edit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,53 +146,39 @@ public class HealthProfileUI extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(daftarAlarm);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(jLabel5)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                        .addGap(42, 42, 42)
+                        .addComponent(edit))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(edit)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addComponent(edit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGap(75, 75, 75)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -266,39 +222,25 @@ public class HealthProfileUI extends javax.swing.JFrame {
 
     private void profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseClicked
         HealthProfileUI healthProfile = new HealthProfileUI();
-    // Set data kesehatan sebelum menampilkan frame HealthProfileUI
-        healthProfile.setHealthProfile(alergiList, penyakitList, kontakList, goldarList);
         // Make the Medicine frame visible
         healthProfile.setVisible(true);
-        // Close the current frame
+        // Close the current Login frame
         this.dispose();
     }//GEN-LAST:event_profileMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        EditHP editHP = new EditHP();
+        EditAlarm editAlarm = new EditAlarm();
         // Make the Medicine frame visible
-        editHP.setVisible(true);
+        editAlarm.setVisible(true);
         // Close the current Login frame
         this.dispose();
     }//GEN-LAST:event_editMouseClicked
-    public void setHealthProfile(List<String> alergiList, List<String> penyakitList, List<String> kontakList, List<String> goldarList) {
-        DefaultListModel<String> alergiModel = new DefaultListModel<>();
-        DefaultListModel<String> penyakitModel = new DefaultListModel<>();
-        DefaultListModel<String> kontakModel = new DefaultListModel<>();
-        DefaultListModel<String> goldarModel = new DefaultListModel<>();
 
-        // Tambahkan elemen dari list yang diterima ke dalam model
-        alergiList.forEach(alergiModel::addElement);
-        penyakitList.forEach(penyakitModel::addElement);
-        kontakList.forEach(kontakModel::addElement);
-        goldarList.forEach(goldarModel::addElement);
 
-        // Atur model untuk setiap JList
-        alergi.setModel(alergiModel);
-        penyakit.setModel(penyakitModel);
-        kontak.setModel(kontakModel);
-        goldar.setModel(goldarModel);
+    public DefaultListModel<String> getListModel() {
+        return listModel;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -316,45 +258,38 @@ public class HealthProfileUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HealthProfileUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alarm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HealthProfileUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alarm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HealthProfileUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alarm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HealthProfileUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Alarm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HealthProfileUI().setVisible(true);
+                Alarm alarm = new Alarm();
+                alarm.pack(); // Pastikan untuk memanggil pack() sebelum setLocationRelativeTo
+                alarm.setLocationRelativeTo(null); // Membuat frame muncul di tengah layar
+                alarm.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel add;
-    private javax.swing.JList<String> alergi;
     private javax.swing.JLabel back;
+    private javax.swing.JList<String> daftarAlarm;
     private javax.swing.JLabel edit;
-    private javax.swing.JList<String> goldar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JList<String> kontak;
-    private java.awt.Panel panel1;
-    private javax.swing.JList<String> penyakit;
     private javax.swing.JLabel pill;
     private javax.swing.JLabel profile;
     // End of variables declaration//GEN-END:variables

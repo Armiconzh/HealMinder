@@ -42,7 +42,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         alarm = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        search = new javax.swing.JTextField();
+        searchButton = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         add = new javax.swing.JLabel();
         pill = new javax.swing.JLabel();
@@ -56,7 +57,6 @@ public class Dashboard extends javax.swing.JFrame {
         lihatSemua = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(360, 800));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
@@ -94,28 +94,35 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search (2).png"))); // NOI18N
+        searchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout clockPanelLayout = new javax.swing.GroupLayout(clockPanel);
         clockPanel.setLayout(clockPanelLayout);
         clockPanelLayout.setHorizontalGroup(
             clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clockPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(clockPanelLayout.createSequentialGroup()
-                        .addComponent(logout)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(alarm))
-                    .addComponent(jLabel4))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(clockLabel)
+                .addContainerGap(311, Short.MAX_VALUE))
             .addGroup(clockPanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(clockPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(clockLabel))
-                    .addGroup(clockPanelLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchButton))
+                    .addGroup(clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(clockPanelLayout.createSequentialGroup()
+                            .addComponent(logout)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(alarm))
+                        .addComponent(jLabel4)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         clockPanelLayout.setVerticalGroup(
             clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +136,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(clockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton))
                 .addGap(27, 27, 27))
         );
 
@@ -283,27 +292,15 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1PropertyChange
 
     private void pillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pillMouseClicked
-        MedicineUI medicine = new MedicineUI();
-        // Make the Medicine frame visible
-        medicine.setVisible(true);
-        // Close the current Login frame
-        this.dispose();
+        navigateToClass("MedicineUI");
     }//GEN-LAST:event_pillMouseClicked
 
     private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
-        ScheduleUI schedule = new ScheduleUI();
-        // Make the Medicine frame visible
-        schedule.setVisible(true);
-        // Close the current Login frame
-        this.dispose();
+        navigateToClass("ScheduleUI");
     }//GEN-LAST:event_addMouseClicked
 
     private void profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseClicked
-        HealthProfileUI healthProfile = new HealthProfileUI();
-        // Make the Medicine frame visible
-        healthProfile.setVisible(true);
-        // Close the current Login frame
-        this.dispose();
+        navigateToClass("HealthProfileUI");
     }//GEN-LAST:event_profileMouseClicked
 
     private void lihatSemuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lihatSemuaMouseClicked
@@ -315,7 +312,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_lihatSemuaMouseClicked
 
     private void alarmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alarmMouseClicked
-        // TODO add your handling code here:
+        navigateToClass("Alarm");
     }//GEN-LAST:event_alarmMouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
@@ -331,6 +328,11 @@ public class Dashboard extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_logoutMouseClicked
+
+    private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
+        String searchInput = search.getText().trim();
+        navigateToClass(searchInput);
+    }//GEN-LAST:event_searchButtonMouseClicked
     private void updateClock() {
         // Update the clock label with the current time
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -350,7 +352,33 @@ public class Dashboard extends javax.swing.JFrame {
     private void updateGreeting() {
         jLabel4.setText("Halo " + username + ", ada yang bisa kami bantu ?");
     }
-    
+    private void navigateToClass(String className) {
+    switch (className) {
+        case "MedicineUI":
+            MedicineUI medicine = new MedicineUI();
+            medicine.setVisible(true);
+            this.dispose();
+            break;
+        case "ScheduleUI":
+            ScheduleUI schedule = new ScheduleUI();
+            schedule.setVisible(true);
+            this.dispose();
+            break;
+        case "HealthProfileUI":
+            HealthProfileUI healthProfile = new HealthProfileUI();
+            healthProfile.setVisible(true);
+            this.dispose();
+            break;
+        case "Alarm":
+            Alarm alarm = new Alarm();
+            alarm.setVisible(true);
+            this.dispose();
+            break;
+        default:
+            JOptionPane.showMessageDialog(this, "Pencarian tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
     /**
      * @param args the command line arguments
      */
@@ -401,10 +429,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lihatSemua;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel pill;
     private javax.swing.JLabel profile;
+    private javax.swing.JTextField search;
+    private javax.swing.JLabel searchButton;
     // End of variables declaration//GEN-END:variables
 }
