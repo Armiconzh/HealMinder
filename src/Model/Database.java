@@ -14,7 +14,7 @@ public class Database {
 //    static final String DB_URL = "jdbc:mysql://4.193.154.78:3306/healminder";
     static final String DB_URL = "jdbc:mysql://4.193.154.78:3306/healminder";
     static final String DB_USER = "root";
-    static final String DB_PASS = "";
+    static final String DB_PASS = "9&#!^bhbsa*dbahju^^hj1@";
     static Connection conn;
     static Statement stmt;
     static ResultSet rs;
