@@ -19,7 +19,7 @@ public class LoginModel {
             
     public User login(String username, String password) throws SQLException {
         System.out.println("USERNAME: " + username);
-        String sqlstring = "SELECT * FROM USER ";
+        String sqlstring = "SELECT * FROM USER WHERE username = '" + username + "'";
 //        Statement statement;
 //        ResultSet otherResult = statement.executeQuery(sqlstring);
 
@@ -34,10 +34,12 @@ public class LoginModel {
         }
         
         return null;
+        
+        
 //        PreparedStatement stmt;
 //        stmt = database.conn.prepareStatement(sqlstring);
 //        stmt.setString(1, username);
 //        stmt.setString(2, password);
 //        stmt.executeUpdate();
-}
+    }
 }

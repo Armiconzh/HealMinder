@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package Model;
-import Model.Database;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,18 +14,18 @@ import java.sql.SQLException;
 public class DaftarModel {
     Database database = new Database();
     
-    String sqlstring = "INSERT INTO user values (?,?,?)";
+    
         
-    public void daftar(String email, String username, String password) throws SQLException {
-//        ResultSet rs = database.getData(sqlstring);
-//        System.out.println(rs);
-        
-        PreparedStatement stmt;
-        stmt = database.conn.prepareStatement(sqlstring);
-        stmt.setString(1, email);
-        stmt.setString(2, username);
-        stmt.setString(3, password);
-        stmt.executeUpdate();
-
+    public void daftar(String email, String username, String password) {
+        String sqlstring = "INSERT INTO USER (email, username, password) values (?, ?, ?)";
+        try (PreparedStatement preparedStatement = database.getConnection().prepareStatement(sqlstring)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, password);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Atau lakukan penanganan eksepsi yang sesuai
+        }
     }
+
 }

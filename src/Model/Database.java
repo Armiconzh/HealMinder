@@ -49,4 +49,24 @@ public class Database {
             JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Communication Error", JOptionPane.WARNING_MESSAGE);
         }
     }
+    
+    public void close() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Ganti ini dengan penanganan kesalahan yang sesuai untuk aplikasi Anda
+        }
+    }
+
+    public Connection getConnection() {
+        return conn;
+    }
 }
