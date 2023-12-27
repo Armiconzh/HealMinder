@@ -11,11 +11,9 @@ import java.sql.SQLException;
  *
  * @author HP
  */
-public class DaftarModel {
+public abstract class DaftarModel implements signable {
     Database database = new Database();
     
-    
-        
     public void daftar(String email, String username, String password) {
         String sqlstring = "INSERT INTO USER (email, username, password) values (?, ?, ?)";
         try (PreparedStatement preparedStatement = database.getConnection().prepareStatement(sqlstring)) {

@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.DaftarModel;
+import Model.User;
 import View.Dashboard;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -17,7 +18,12 @@ import javax.swing.JTextField;
  */
 public class DaftarController {
 
-    DaftarModel daftarModel = new DaftarModel();
+    DaftarModel daftarModel = new DaftarModel() {
+        @Override
+        public User login(String username, String password) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
     public boolean isDaftarValid(String email, String username, String password) {                                    
         // Check if any of the fields is empty
         return (email.isEmpty() || username.isEmpty() || password.isEmpty());

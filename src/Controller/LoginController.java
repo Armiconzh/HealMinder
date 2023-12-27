@@ -14,7 +14,12 @@ import java.sql.SQLException;
  * @author HP
  */
 public class LoginController {
-    LoginModel loginModel = new LoginModel();
+    LoginModel loginModel = new LoginModel() {
+        @Override
+        public void daftar(String email, String username, String password) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
     
     public User login(String username, String password) throws SQLException{
         return loginModel.login(username, password);
